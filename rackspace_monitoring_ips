@@ -1,0 +1,20 @@
+
+iptables -N RACKSPACEIPS
+iptables -A RACKSPACEIPS -i eth0 -s 10.0.0.0/8 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 50.56.228.0/27 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 50.56.230.0/27 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 64.39.0.0/23 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 64.39.2.144/28 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 69.20.0.0/29 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 72.3.128.0/23 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 89.234.23.50/32 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 92.52.78.6/32 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 92.52.78.14/32 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 94.236.7.190/32 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 212.100.225.32/27 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 212.100.225.42/32 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 212.100.225.49/32 -j ACCEPT
+iptables -A RACKSPACEIPS -i eth0 -s 212.100.225.55/32  -j ACCEPT
+iptables -A RACKSPACEIPS -j RETURN
+iptables -I INPUT 1 -j RACKSPACEIPS
+/etc/init.d/iptables save 

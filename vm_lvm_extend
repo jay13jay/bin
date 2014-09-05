@@ -1,0 +1,26 @@
+1019  2013-08-13_21:43:42 for x in `ls /sys/class/scsi_host/` ; do echo "- - -" > /sys/class/scsi_host/$x/scan ; done
+ 1020  2013-08-13_21:43:43 for x in `ls /sys/class/scsi_device/` ; do echo 1 > /sys/class/scsi_device/$x/device/rescan ; done 
+ 1021  2013-08-13_21:43:49 fdisk -l
+ 1022  2013-08-13_21:44:11 df -h
+ 1023  2013-08-13_21:44:43 cgdisk
+ 1024  2013-08-13_21:44:45 fdisk
+ 1025  2013-08-13_21:45:49 fdisk /dev/sda
+ 1026  2013-08-13_21:47:40 fdisk -l
+ 1027  2013-08-13_21:47:59 pvcreate /dev/sda3
+ 1028  2013-08-13_21:48:07 for x in `ls /sys/class/scsi_host/` ; do echo "- - -" > /sys/class/scsi_host/$x/scan ; done
+ 1029  2013-08-13_21:48:08 for x in `ls /sys/class/scsi_device/` ; do echo 1 > /sys/class/scsi_device/$x/device/rescan ; done 
+ 1030  2013-08-13_21:48:11 pvcreate /dev/sda3
+ 1031  2013-08-13_21:48:16 partx -a
+ 1032  2013-08-13_21:48:23 partx -a /dev/sda
+ 1033  2013-08-13_21:48:32 pvcreate /dev/sda3
+ 1034  2013-08-13_21:48:39 pvs
+ 1035  2013-08-13_21:48:56 vgdisplay
+ 1036  2013-08-13_21:51:33 vgdisplay
+ 1037  2013-08-13_21:52:56 vgextend vglocal20120803 /dev/sda3
+ 1038  2013-08-13_21:53:00 vgs
+ 1039  2013-08-13_21:53:15 lvs
+ 1040  2013-08-13_21:55:36 lvextend -r -l +100%FREE /dev/vglocal20120803/root00 
+ 1041  2013-08-13_21:55:44 lvs
+ 1042  2013-08-13_21:55:48 df -h
+ 1043  2013-08-13_21:56:31 fdisk -l
+

@@ -1,0 +1,2 @@
+
+for i in `pgrep httpd`;do egrep 'VmSize' /proc/$i/status|awk '{print $2}'; done|awk '{sum += $1}END{print "Total java VmSize:\t", (sum/1024), "MB"}'

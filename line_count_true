@@ -1,0 +1,1 @@
+printf "enter bash variable for file name (regex filename, however you would pass it to a bash script)\n"; read FILE; BLANKS=`sed  -n 's/^$//gp' engine2.py |wc -l`; TOTAL=`cat engine2.py |wc -l`; DIFF=`expr $TOTAL - $BLANKS`; printf "\n\nTotal:\t $TOTAL \nBlank lines:\t $BLANKS \nLine count:\t $DIFF\n" 

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# restore backup .my.cnf and preferences
+
+mv /root/.my.cnf.bak /root/.my.cnf;
+mysql -Ns psa -e "select name from domains" | awk '{printf("/usr/local/psa/bin/domain_pref --update %s -overuse normal\n", $1)}' | sh;
+mysql -Ns psa -e "select login from clients" | awk '{printf("/usr/local/psa/bin/client_pref --update %s -overuse normal\n", $1)}' | sh;
+
+

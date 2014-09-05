@@ -1,0 +1,38 @@
+  650  2013-07-26_17:54:04 ls -hal /sys/class/scsi_device/
+  651  2013-07-26_17:54:17 cd 0:0:0:0
+  652  2013-07-26_17:54:37 cd /sys/class/scsi_device/0\:0\:0\:0/device/
+  654  2013-07-26_21:24:22 resize2fs /dev/vg_holland/lv_holland 
+  657  2013-07-26_21:06:39 source .rackspace/rstools/ls-init.sh 
+  658  2013-07-26_21:06:41 lselogin
+  659  2013-07-26_21:07:03 pvdisplay
+  660  2013-07-26_21:07:07 fdisk -l
+  666  2013-07-26_21:09:36 for x in `ls /sys/class/scsi_device/` ; do echo 1 > /sys/class/scsi_device/$x/device/rescan ; done
+  667  2013-07-26_21:09:43 fdisk /dev/sdc
+  668  2013-07-26_21:17:26 pvdisplay
+  669  2013-07-26_21:18:02 fdisk -l
+  670  2013-07-26_21:18:29 fdisk /dev/sdc
+  671  2013-07-26_21:20:00 partprobe /dev/sdc
+  672  2013-07-26_21:20:32 partx -a /dev/sdc
+  674  2013-07-26_21:20:47 ls -l sdc*
+  675  2013-07-26_21:20:54 fdisk -l /dev/sdc
+  676  2013-07-26_21:21:00 fdisk /dev/sdc
+  677  2013-07-26_21:21:20 pvcreate /dev/sdc2
+  678  2013-07-26_21:21:31 vgdisplay
+  679  2013-07-26_21:21:50 vgextend vg_holland /dev/sdc2
+  684  2013-07-26_21:23:31 lvextend lv_holland -l +100%FREE
+  685  2013-07-26_21:23:50 lvextend /dev/vg_holland/lv_holland -l +100%FREE
+  686  2013-07-26_21:24:14 screen
+  687  2013-07-26_21:24:29 watch df -h
+  688  2013-07-26_21:25:48 screen -r
+  689  2013-07-26_21:26:37 [LOGOUT]: rack     pts/0        2013-07-26 20:57 (secure-bastion.dfw1.rackspace.com)
+  690  2013-07-26_20:57:38 lsblk
+  691  2013-07-26_21:03:06 pvcreate /dev/sdc6
+  692  2013-07-26_21:03:23 for x in `ls /sys/class/scsi_device/` ; do echo 1 > /sys/class/scsi_device/$x/device/rescan ; done
+  693  2013-07-26_21:03:31 lsblk
+  694  2013-07-26_21:03:43 pvcreate /dev/sdc6
+  695  2013-07-26_21:04:01 partprobe
+  696  2013-07-26_21:04:09 lsblk
+  697  2013-07-26_21:26:17 history
+  698  2013-07-26_21:26:22 exit
+  699  2013-07-26_21:26:39 history
+

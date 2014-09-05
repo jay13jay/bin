@@ -1,0 +1,55 @@
+#!/bin/bash
+
+#initial backup of databases
+
+mysqldump -Q -l psa > ./psa_`cat /usr/local/psa/version|cut -d. -f1`_backup.sql;
+mysqldump -Q -l horde > ./horde_`cat /usr/local/psa/version|cut -d. -f1`_backup.sql;
+mysqldump -Q -l mysql > ./mysql_`cat /usr/local/psa/version|cut -d. -f1`_backup.sql;
+cp -a /etc/psa* .;
+cp -a /etc/php* .;
+cp -a /etc/my* .;
+cp -a /etc/drweb* .;
+cp -a /usr/local/psa/version .;
+php -v > php-v.out;
+php -m > php-m.out;
+mysql -V > mysql-V.out;
+cp -a /etc/courier-imap/imapd .;
+cp -a /etc/courier-imap/pop3d .;
+cp -a /etc/passwd .;
+httpd -S > httpd-S.out 2>&1;
+for s in `mysql psa -sN -e "select name from domains;"`; do printf $s" "; /usr/local/psa/bin/domain_pref.sh --info $s | grep WebMail | awk '{print $2}'; done > DomainsWebmailStatus.txt;
+
+# backup of the vhosts and subdomains:
+
+mkdir -p conf/subdomains;
+for s in `find /var/www/vhosts/*/conf -type f -name vhost*.conf`; do r=`echo $s | sed 's/\/var\/www\/vhosts\///g' | sed 's/\/conf\//_/g'`; cp -av $s conf/$r; done;
+for s in `find /var/www/vhosts/*/subdomains/*/conf -type f -name vhost*.conf`; do r=`echo $s | sed 's/\/var\/www\/vhosts\///g' | sed 's/\/subdomains\//_/g' | sed 's/\/conf\//_/g' | awk -F_ '{print $2 "." $1 "_" $3}'`; cp -av $s conf/subdomains/$r; done;
+
+# search for backup vhost files
+
+find /var/www/vhosts/*/conf -name "vhost*.conf*" -ls |egrep -v vhost_ssl\|vhost.conf$
+
+# check for qmail or postfix:
+
+netstat -ntlp |awk '/25/ {print $4,"\t", $NF}' |grep -E [0-9\.]:25
+
+#check for rs-managed packages
+
+rpm -qa | grep rs-managed
+
+# check for hostname resolution
+
+ifconfig eth0 | grep inet;
+grep `hostname` /etc/hosts;
+
+#search for old passwords:
+
+grep old_passwords /etc/my.cnf;
+
+#check for BH imagemagick
+
+rpm -qa |grep -i mage;
+
+#disable BH repo
+
+sed -i 's/^enabled=1/enabled=0/g' /etc/yum.repos.d/bluehat.repo

@@ -1,0 +1,12 @@
+if [ -z "$1" ];
+then printf "didn't provide any arguments";
+exit;
+else 
+USER=$1;
+len=12;
+NEWPASS=`tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${len} | xargs`;
+printf $NEWPASS | passwd --stdin $USER;
+printf $NEWPASS $USER;
+printf "$NEWPASS \t $USER \n" >> /home/rack/passwords.txt;
+printf "\t DONE! \t";
+fi

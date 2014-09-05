@@ -1,0 +1,29 @@
+
+Find them:
+
+Way1:
+
+grep 'Failed password' /var/log/secure|awk '{print $(NF-3)}'|sort -n|uniq -c|sort -nk1|awk '{if($1>300)print $2}'
+
+Way2:
+
+awk '/Failed password/ {print $(NF-3)}' /var/log/secure |sort -n|uniq -c|sort -nk1|awk '{sum+=$1;if($1>300)print "IP: ",$2,"Failed login",$1,"Times"}END{print "\nTotal failed attempts:\t"sum}'
+
+
+GEOLOCATE IP'S
+
+for i in $(grep 'Failed password' /var/log/secure|awk '{print $(NF-3)}'|sort -n|uniq -c|sort -nk1|awk '{if($1>300)print $2}'); do printf "IP:\t$i\n";whois $i|grep country|tail -1; done
+
+BLOCK THEM:
+
+for i in $(grep 'Failed password' /var/log/secure|awk '{print $(NF-3)}'|sort -n|uniq -c|sort -nk1|awk '{if($1>300)print $2}'); do printf "BLOCKING IP:\t$i\n";iptables -I INPUT -s $i -j DROP; done
+
+
+
+********
+**HTTP**
+********
+
+for i in $(tail -100000 /var/log/httpd/access_log | awk '{print $1}' | sort -n | uniq -c | sort -nk1 |tail|awk '{print $2}'); do printf "IP:\t$i\n";whois $i|grep [Cc]ountry|tail -1; done
+
+

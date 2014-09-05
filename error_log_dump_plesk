@@ -1,0 +1,2 @@
+for i in $(ls); do echo "$i" >> error_logs.rack.txt && tail -1000 /var/www/vhosts/$i/statistics/logs/error_log >> error_logs.rack.txt; done
+

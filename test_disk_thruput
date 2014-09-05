@@ -1,0 +1,1 @@
+dd if=/dev/zero of=test.img bs=1024 count=0 seek=$[1024*1000]; rsync -Pavz test.img test2.img

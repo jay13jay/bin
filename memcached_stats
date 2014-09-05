@@ -1,0 +1,1 @@
+php -r '$m=new Memcache;$m->connect("127.0.0.1", 11211);print_r($m->getstats());'

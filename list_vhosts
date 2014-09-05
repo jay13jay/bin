@@ -1,0 +1,1 @@
+echo;httpd -S 2>&1|awk '/namevhost/ {print $4,"\t",$5}' |sed -e 's/[():]/  /g';echo

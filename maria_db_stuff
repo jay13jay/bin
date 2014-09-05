@@ -1,0 +1,6 @@
+You can start the MariaDB daemon with:
+cd '/opt/local' ; /opt/local/lib/mariadb/bin/mysqld_safe --datadir='/opt/local/var/db/mariadb'
+
+You can test the MariaDB daemon with mysql-test-run.pl
+cd '/opt/local/mysql-test' ; perl mysql-test-run.pl
+

@@ -1,0 +1,1 @@
+echo "Real memory usage"; sar -r | egrep "AM|PM" | egrep -v "RESTART|kbmemfree|Average" | awk '{print $1 " " $2 " - " ((($4-$6)-$7)/($3+$4))*100 "%" }'

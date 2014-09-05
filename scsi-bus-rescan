@@ -1,0 +1,5 @@
+re-scan scsi bus to see if changes to block devices take effect
+
+for x in `ls /sys/class/scsi_host/` ; do echo "- - -" > /sys/class/scsi_host/$x/scan ; done
+for x in `ls /sys/class/scsi_device/` ; do echo 1 > /sys/class/scsi_device/$x/device/rescan ; done 
+

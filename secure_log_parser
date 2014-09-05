@@ -1,0 +1,4 @@
+
+awk '/authentication failure/ {gsub(/=|\[|\]/," ");if($5 ~ /sshd/)print "SERVICE ",$5"\t",$(NF-2);else if($5 ~ /dovecot/)print "SERVICE: ",$5"\t"$NF;else if($5~/saslauthd/)print"SERVICE: ",$5"\t"$NF;else print "SERVICE: ",$5"\t",$NF}' /var/log/secure |sort -k2|uniq -c|sort -nk1
+
+awk '/authentication failure/ {gsub(/=|\[|\]/," ");if($5 ~ /sshd/)print $(NF-2);else print $NF}' /var/log/secure |grep -v saslauthd|sort|uniq -c|sort -nk1

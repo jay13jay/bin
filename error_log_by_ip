@@ -1,0 +1,1 @@
+tail -1000 /var/log/httpd/error_log |grep error |awk '{print$8}' |sed 's/]//' |sort -n |uniq -c

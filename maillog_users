@@ -1,0 +1,1 @@
+tail -10000 /var/log/maillog |awk '/user\=/ {print $3, $8}'

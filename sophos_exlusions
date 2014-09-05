@@ -1,0 +1,1 @@
+/opt/sophos-av/bin/savconfig query ExcludeFileOnGlob && /opt/sophos-av/bin/savconfig query ExcludeFilePaths

@@ -1,0 +1,10 @@
+netstat -plant | sed 's/[::ffff:|:]/ /g' | awk '{if ($5 == 80 || $5 == 443){ print "web "$6; }else{ print $5" "$6 } }' | sort | uniq -c | sort -nk1
+
+# new way, minus the sed
+
+netstat -plant|awk '{gsub(/[::ffff:|:]/," ");if($5==80||$5==443){print "web "$6;}else{print $5" "$6}}'|sort|uniq -c|sort -nk1
+
+
+# only get connections to 80
+
+netstat -antpu|awk '{if($4 ~ /:80||:443/)print}'|wc -l
