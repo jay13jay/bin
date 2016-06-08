@@ -1,5 +1,0 @@
-service httpd stop;
-service mysqld stop;
-
-rsync /var/www/vhosts/ /mnt/array2/var/www/vhosts/;
-rsync /var/lib/mysql/ /mnt/array2/var/lib/mysql/;
